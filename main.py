@@ -1,17 +1,54 @@
-# This is a sample Python script.
+# from flask import Flask
+#
+# app = Flask(__name__)
+#
+# @app.route('/')
+# def hello_world():
+#     return 'Hello, World!'
+#
+# if __name__ == '__main__':
+#     app.run(debug=True)
+import mysql.connector
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+# Configurația bazei de date
+db_config = {
+    'host': '127.0.0.1',
+    'port': 3306,
+    'user': 'root',
+    'password': '',
+    'database': 'HRSystem'
+}
 
+try:
+    # Conectarea la baza de date
+    connection = mysql.connector.connect(**db_config)
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+    if connection.is_connected():
+        print("Conexiunea la baza de date a fost realizată cu succes!")
 
+        # Crearea unui cursor pentru a executa interogările SQL
+        cursor = connection.cursor()
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+        # Executarea unei interogări SELECT pentru a obține toate înregistrările din tabelul 'users'
+        cursor.execute("SELECT * FROM users")
 
+        # Obținerea descrierii coloanelor
+        column_names = [column[0] for column in cursor.description]
+        print("Coloanele tabelului 'users':", column_names)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+        # Obținerea tuturor rândurilor rezultate și printarea cheilor și valorilor asociate
+        users = cursor.fetchall()
+        for user in users:
+            user_dict = dict(zip(column_names, user))
+            print(user_dict)
+
+except mysql.connector.Error as e:
+    print("Eroare la conectarea la baza de date:", e)
+
+finally:
+    # Închiderea cursorului și a conexiunii
+    if 'connection' in locals() and connection.is_connected():
+        cursor.close()
+        connection.close()
+        print("Conexiunea la baza de date a fost închisă.")
+
