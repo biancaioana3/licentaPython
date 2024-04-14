@@ -1,0 +1,99 @@
+from sqlalchemy import create_engine
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.linear_model import LogisticRegression
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.naive_bayes import GaussianNB
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+
+# Conectarea la baza de date
+engine = create_engine('mysql+mysqlconnector://root:@localhost/HRSystem')
+
+# Extrage datele din baza de date
+cv_data = pd.read_sql_query("SELECT * FROM cv WHERE status='analizat'", engine)
+job_data = pd.read_sql_query("SELECT * FROM jobs", engine)
+
+# Extrage datele din pivot tabelă
+pivot_data = pd.read_sql_query("SELECT cv_id, job_id, employee FROM job_has_cv", engine)
+
+# Combină datele cu informațiile din CV-uri și joburi
+merged_data = pd.merge(pivot_data, cv_data, left_on='cv_id', right_on='id')
+merged_data = pd.merge(merged_data, job_data, left_on='job_id', right_on='id')
+
+# Preprocesarea datelor
+merged_data['accepted'] = merged_data['employee']  # Redenumește coloana pentru claritate
+merged_data['accepted'] = merged_data['accepted'].astype(int)  # Converteste in valori numerice binare
+
+# Ingineria de caracteristici pentru datele preprocesate
+vectorizer = TfidfVectorizer(stop_words='english')
+
+merged_data = merged_data.dropna(subset=['technical_skills', 'soft_skills', 'experience_position_1', 'experience_responsibilities_1'])
+X_cv = vectorizer.fit_transform(merged_data['technical_skills'] + ' ' + merged_data['soft_skills'] + ' ' + merged_data['experience_position_1'] + ' ' + merged_data['experience_responsibilities_1'])
+y = merged_data['accepted']
+
+# Antrenarea modelului cu datele prelucrate
+X_train, X_test, y_train, y_test = train_test_split(X_cv, y, test_size=0.2, random_state=42)
+model = MultinomialNB()
+# model = LogisticRegression()
+
+model.fit(X_train, y_train)
+
+# Evaluarea modelului
+y_pred = model.predict(X_test)
+accuracy = accuracy_score(y_test, y_pred)
+print("Accuracy:", accuracy)
+
+# Calculul altor metrici de evaluare
+precision = precision_score(y_test, y_pred)
+recall = recall_score(y_test, y_pred)
+f1 = f1_score(y_test, y_pred)
+
+print("Precision:", precision)
+print("Recall:", recall)
+print("F1-score:", f1)
+# Extrage ID-ul unui singur job din baza de date pentru a genera predicții pentru mai multe CV-uri noi
+job_id_to_generate_for = 17  # Schimbă acest ID cu ID-ul jobului dorit
+
+# Verificăm dacă există un job pentru a genera predicții
+job_to_generate_for_query = f"SELECT * FROM jobs WHERE id={job_id_to_generate_for}"
+job_to_generate_for = pd.read_sql_query(job_to_generate_for_query, engine)
+
+if not job_to_generate_for.empty:
+    # Extragem abilitățile tehnice și soft necesare pentru job
+
+    job_tech_skills = job_to_generate_for['requirements_skills_technical'].iloc[0]
+    job_soft_skills = job_to_generate_for['requirements_skills_soft'].iloc[0]
+    job_title = job_to_generate_for['title'].iloc[0]
+
+    # Preprocesăm abilitățile tehnice și soft ale jobului
+    X_job_skills = vectorizer.transform([job_tech_skills + ' ' + job_soft_skills + ' ' + job_title])
+
+    # Facem predicții pentru abilitățile tehnice și soft ale jobului
+    job_prediction = model.predict(X_job_skills)
+
+    # Verificăm dacă există CV-uri noi pentru a face predicții
+    new_cv_data = pd.read_sql_query("SELECT * FROM cv WHERE status='pending'", engine)
+
+    if not new_cv_data.empty:
+        for index, cv_row in new_cv_data.iterrows():
+            # Extragem abilitățile tehnice și abilitățile soft ale CV-ului
+            cv_technical_skills = cv_row['technical_skills']
+            cv_soft_skills = cv_row['soft_skills']
+            cv_experience_position_1 = cv_row['experience_position_1']
+            cv_experience_responsibilities_1 = cv_row['experience_responsibilities_1']
+
+            if pd.notnull(cv_technical_skills) and pd.notnull(cv_soft_skills) and pd.notnull(cv_experience_position_1) and pd.notnull(cv_experience_responsibilities_1):
+                # Preprocesăm abilitățile CV-ului
+                X_cv = vectorizer.transform([cv_technical_skills + ' ' + cv_soft_skills + ' ' + cv_experience_position_1 + ' ' + cv_experience_responsibilities_1])
+
+                # Facem predicții pentru CV-ul nou
+                cv_prediction = model.predict(X_cv)
+
+                # Verificăm dacă CV-ul și job-ul sunt potrivite
+                if cv_prediction[0] == 0 and job_prediction[0] == 1:
+                    print(
+                        f"The CV '{cv_row['name'] + cv_row['technical_skills']}' is suitable for the job '{job_to_generate_for['title'].iloc[0]}'!")
+            else:
+                print("One or both of the skills fields are None or empty. Skipping CV processing.")
+
