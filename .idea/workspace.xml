@@ -5,8 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bf83079f-bcf3-49a7-8533-3396db876b50" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/testML.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ML-Resume.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Resume.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recomanda_service.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testML.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,15 +42,29 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python.Arb.executor": "Run",
+    "Python.K-NN.executor": "Run",
+    "Python.ML-Resume.executor": "Run",
     "Python.main.executor": "Run",
     "Python.recomanda_service.executor": "Run",
+    "Python.resume.executor": "Run",
     "Python.testML.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main"
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/biancabriulung/PycharmProjects/pythonProjectLicenta"
   }
 }]]></component>
-  <component name="RunManager" selected="Python.testML">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$USER_HOME$/Desktop/ML-incercari" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="pythonProjectLicenta" />
       <option name="ENV_FILES" value="" />
@@ -81,7 +100,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/testML.py" />
+      <option name="SCRIPT_NAME" value="$USER_HOME$/Desktop/ML-incercari/testML.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />

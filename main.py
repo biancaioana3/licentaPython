@@ -30,7 +30,7 @@ try:
         cursor = connection.cursor()
 
         # Executarea unei interogări SELECT pentru a obține toate înregistrările din tabelul 'users'
-        cursor.execute("SELECT * FROM users")
+        cursor.execute("SELECT * FROM job_has_cv")
 
         # Obținerea descrierii coloanelor
         column_names = [column[0] for column in cursor.description]
