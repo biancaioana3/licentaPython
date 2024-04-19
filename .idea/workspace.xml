@@ -5,13 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bf83079f-bcf3-49a7-8533-3396db876b50" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/ML-Resume.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Resume.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/recomanada_service_old.pyi" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recomanda_service.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testML.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/recomanda_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/recomanda_service.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +18,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="Python Stub" />
       </list>
     </option>
   </component>
@@ -60,8 +57,8 @@
       <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$USER_HOME$/Desktop/ML-incercari" />
       <recent name="$PROJECT_DIR$" />
+      <recent name="$USER_HOME$/Desktop/ML-incercari" />
     </key>
   </component>
   <component name="RunManager">
