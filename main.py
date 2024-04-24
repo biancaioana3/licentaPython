@@ -52,3 +52,26 @@ finally:
         connection.close()
         print("Conexiunea la baza de date a fost închisă.")
 
+
+
+
+
+
+
+# app = Flask(__name__)
+# # CORS(app)  # Permit toate originile
+# CORS(app, origins=['http://localhost:8000'])
+#
+#
+# @app.route('/recomanda-candidati', methods=['OPTIONS', 'POST'])
+# def recomanda_candidati():
+#     try:
+#         data = request.get_json()
+#         resume_type = data.get('resume_type')
+#         print(resume_type)
+#         predicted_candidates = predict_candidates(resume_type)
+#         print(predicted_candidates)
+#         return jsonify({'candidates': predicted_candidates})
+#
+#     except Exception as e:
+#         return jsonify({"error": str(e)})
