@@ -5,18 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bf83079f-bcf3-49a7-8533-3396db876b50" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/alg_testing/DecisionTreeClassifier-Resume.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/alg_testing/K-NN-Resume.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/alg_testing/Naive-Bayes-Resume.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/alg_testing/Random-Forests-Resume.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/alg_testing/Resume.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/alg_testing/SVM-Resume.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/alg_testing/testML.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Resume_data.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/csv_insert_dataTable.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ML-Resume.py" beforeDir="false" afterPath="$PROJECT_DIR$/alg_testing/ML-Resume.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recomanada_service_old.pyi" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/recomanda_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/recomanda_service.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,33 +37,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.Arb.executor&quot;: &quot;Run&quot;,
-    &quot;Python.DecisionTreeClassifier-Resume.executor&quot;: &quot;Run&quot;,
-    &quot;Python.K-NN-Resume.executor&quot;: &quot;Run&quot;,
-    &quot;Python.K-NN.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Keras-Resume.executor&quot;: &quot;Run&quot;,
-    &quot;Python.ML-Resume.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Naive-Bayes-Resume.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Q-learning-Resume.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Random-Forests-Resume.executor&quot;: &quot;Run&quot;,
-    &quot;Python.SVM-Resume.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.recomanda_service.executor&quot;: &quot;Run&quot;,
-    &quot;Python.resume.executor&quot;: &quot;Run&quot;,
-    &quot;Python.retele_neuronale.executor&quot;: &quot;Run&quot;,
-    &quot;Python.testML.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/biancabriulung/PycharmProjects/pythonProjectLicenta/alg_testing&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.Arb.executor": "Run",
+    "Python.DecisionTreeClassifier-Resume.executor": "Run",
+    "Python.K-NN-Resume.executor": "Run",
+    "Python.K-NN.executor": "Run",
+    "Python.Keras-Resume.executor": "Run",
+    "Python.ML-Resume.executor": "Run",
+    "Python.Naive-Bayes-Resume.executor": "Run",
+    "Python.Q-learning-Resume.executor": "Run",
+    "Python.Random-Forests-Resume.executor": "Run",
+    "Python.SVM-Resume.executor": "Run",
+    "Python.csv_insert_dataTable.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.recomanda_service.executor": "Run",
+    "Python.resume.executor": "Run",
+    "Python.retele_neuronale.executor": "Run",
+    "Python.testML.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "security",
+    "last_opened_file_path": "/Users/biancabriulung/PycharmProjects/pythonProjectLicenta"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/alg_testing" />
       <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/alg_testing" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/alg_testing" />
