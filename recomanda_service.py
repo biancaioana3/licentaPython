@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import mysql.connector
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -28,18 +27,21 @@ def preprocess_text(text):
     return ' '.join(lemmatized_words)
 
 
-df = pd.read_csv('Resume.csv')
+# df = pd.read_csv('Resume.csv')
 
-df['Resume_str'] = df['Resume_str'].fillna('')
-df['Resume_str'] = df['Resume_str'].apply(preprocess_text)
+query = "SELECT * FROM data_model"
+engine = create_engine('mysql+mysqlconnector://root:@localhost/HRSystem')
+df = pd.read_sql_query(query, engine)
+df['resume_str'] = df['resume_str'].fillna('')
+df['resume_str'] = df['resume_str'].apply(preprocess_text)
 
 min_examples = 105
-class_counts = df['Category'].value_counts()
+class_counts = df['category'].value_counts()
 weak_classes = class_counts[class_counts < min_examples].index.tolist()
-df_filtered = df[~df['Category'].isin(weak_classes)]
+df_filtered = df[~df['category'].isin(weak_classes)]
 
-X_filtered = df_filtered['Resume_str']
-y_filtered = df_filtered['Category']
+X_filtered = df_filtered['resume_str']
+y_filtered = df_filtered['category']
 
 X_train_filtered, X_test_filtered, y_train_filtered, y_test_filtered = train_test_split(X_filtered, y_filtered,
                                                                                         test_size=0.2, random_state=42)
@@ -64,8 +66,8 @@ print("\nClassification Report for training dataset using Random Forest:")
 print(classification_report(y_train_filtered, y_train_pred_random_forest))
 
 def predict_candidates(category):
-    engine = create_engine('mysql+mysqlconnector://root:@localhost/HRSystem')
-    cv_data = pd.read_sql_query("SELECT * FROM cv WHERE status='pending'", engine)
+
+    cv_data = pd.read_sql_query("SELECT * FROM resumes WHERE status='pending'", engine)
     relevant_columns = [col for col in cv_data.columns if col != 'id']
     cv_data['Concatenated_Text'] = cv_data[relevant_columns].apply(
         lambda row: ' '.join([str(row[col]) for col in relevant_columns]), axis=1)
@@ -82,36 +84,7 @@ def predict_candidates(category):
             'id': row['id'],
             'name': row['name'],
             'email': row['email'],
-            # 'street_address': row['street_address'],
-            # 'postal_code': row['postal_code'],
-            # 'city': row['city'],
-            # 'county': row['county'],
-            # 'country': row['country'],
             'phone': row['phone'],
-            # 'birthdate': row['birthdate'],
-            # 'education_institution_1': row['education_institution_1'],
-            # 'education_major_1': row['education_major_1'],
-            # 'education_degree_1': row['education_degree_1'],
-            # 'education_graduation_year_1': row['education_graduation_year_1'],
-            # 'education_institution_2': row['education_institution_2'],
-            # 'education_major_2': row['education_major_2'],
-            # 'education_degree_2': row['education_degree_2'],
-            # 'education_graduation_year_2': row['education_graduation_year_2'],
-            # 'experience_company_1': row['experience_company_1'],
-            # 'experience_position_1': row['experience_position_1'],
-            # 'experience_period_1': row['experience_period_1'],
-            # 'experience_responsibilities_1': row['experience_responsibilities_1'],
-            # 'experience_company_2': row['experience_company_2'],
-            # 'experience_position_2': row['experience_position_2'],
-            # 'experience_period_2': row['experience_period_2'],
-            # 'experience_responsibilities_2': row['experience_responsibilities_2'],
-            # 'language_1': row['language_1'],
-            # 'language_level_1': row['language_level_1'],
-            # 'language_2': row['language_2'],
-            # 'language_level_2': row['language_level_2'],
-            # 'technical_skills': row['technical_skills'],
-            # 'soft_skills': row['soft_skills'],
-            # 'status': row['status']
         }
         candidates.append(candidate_info)
 
@@ -119,9 +92,8 @@ def predict_candidates(category):
 
 
 app = Flask(__name__)
-# CORS(app)  # Permit toate originile
-CORS(app, origins=['http://localhost:8000'])
-
+# CORS(app)
+CORS(app, resources={r"/recomanda-candidati": {"origins": "http://localhost:8000"}})
 
 @app.route('/recomanda-candidati', methods=['OPTIONS', 'POST'])
 def recomanda_candidati():
